@@ -1,0 +1,25 @@
+.preview-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.video-players {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.original-video,
+.enhanced-video {
+  width: 480px;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}

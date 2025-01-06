@@ -8,7 +8,6 @@ export const Preview: React.FC = () => {
   const enhancedVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    console.log("Preview updated with enhanced video:", enhancedVideoUrl);
     if (enhancedVideoRef.current) {
       const video = enhancedVideoRef.current;
       video.currentTime = 0;

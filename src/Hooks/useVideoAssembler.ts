@@ -14,7 +14,6 @@ export const useVideoAssembler = () => {
         return videoBlob;
       } catch (err) {
         setError("Failed to assemble video.");
-        console.error(err);
         return null;
       } finally {
         setIsAssembling(false);

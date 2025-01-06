@@ -41,7 +41,6 @@ export const VideoProvider: React.FC<{ children: ReactNode }> = ({
     if (originalVideoUrl && resolution) {
       const newEnhancedVideoUrl = `${originalVideoUrl}#enhanced-${resolution}`;
       setEnhancedVideoUrl(newEnhancedVideoUrl);
-      console.log("Enhanced video URL updated:", newEnhancedVideoUrl);
     }
   }, [originalVideoUrl, resolution]);
 

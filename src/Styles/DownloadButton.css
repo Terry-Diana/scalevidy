@@ -1,0 +1,32 @@
+.download-container {
+  text-align: center;
+  margin: 20px 0 20px 0;
+}
+
+.download-container button {
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: #007bff;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.download-container button:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+}
+
+.download-container button:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+.download-container p {
+  color: #888;
+  font-size: 14px;
+  margin-top: 10px;
+}

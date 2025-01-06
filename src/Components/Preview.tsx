@@ -1,41 +1,56 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useVideoContext } from "../Context/VideoContext";
 import "../Styles/Preview.css";
 
 export const Preview: React.FC = () => {
-  const { originalVideo, enhancedVideo } = useVideoContext();
+  const { originalVideoUrl, enhancedVideoUrl } = useVideoContext();
+
+  const enhancedVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (enhancedVideoRef.current) {
+      const video = enhancedVideoRef.current;
+      video.currentTime = 0;
+
+      const handleTimeUpdate = () => {
+        if (video.currentTime >= 15) {
+          video.pause();
+        }
+      };
+
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+    }
+  }, [enhancedVideoUrl]);
 
   return (
     <div className="preview-container">
       <h2>Preview</h2>
       <div className="video-players">
+        {/* Original Video Section */}
         <div className="video-wrapper">
           <h3>Original Video</h3>
-          <video
-            controls
-            src={originalVideo || undefined}
-            className="original-video"
-          />
+          {originalVideoUrl ? (
+            <video controls src={originalVideoUrl} className="original-video" />
+          ) : (
+            <p>No original video available</p>
+          )}
         </div>
-        {enhancedVideo && (
-          <div className="video-wrapper">
-            <h3>15-Second Preview</h3>
+
+        {/* Enhanced Video Section */}
+        <div className="video-wrapper">
+          <h3>Enhanced Video (15-Second Preview)</h3>
+          {enhancedVideoUrl ? (
             <video
               controls
-              src={enhancedVideo}
+              src={enhancedVideoUrl}
+              ref={enhancedVideoRef}
               className="enhanced-video"
-              onLoadedMetadata={(e) => {
-                const video = e.currentTarget;
-                video.currentTime = 0;
-                video.addEventListener("timeupdate", () => {
-                  if (video.currentTime >= 15) {
-                    video.pause();
-                  }
-                });
-              }}
             />
-          </div>
-        )}
+          ) : (
+            <p>No enhanced video available</p>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,47 +1,38 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface VideoContextType {
-  originalVideo: string | undefined;
-  enhancedVideo: string | undefined;
+  originalVideoUrl: string | undefined;
+  setOriginalVideoUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
+  enhancedVideoUrl: string | undefined;
+  setEnhancedVideoUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   resolution: string | undefined;
-  setOriginalVideo: (url: string) => void;
-  setEnhancedVideo: (url: string) => void;
-  setResolution: (res: string) => void;
+  setResolution: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const VideoContext = createContext<VideoContextType | undefined>(undefined);
 
 export const VideoProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [originalVideo, setOriginalVideoState] = useState<string | undefined>(
-    undefined
-  );
-  const [enhancedVideo, setEnhancedVideoState] = useState<string | undefined>(
-    undefined
-  );
-  const [resolution, setResolutionState] = useState<string | undefined>(
-    undefined
-  );
+  const [originalVideoUrl, setOriginalVideoUrl] = useState<string | undefined>(undefined);
+  const [enhancedVideoUrl, setEnhancedVideoUrl] = useState<string | undefined>(undefined);
+  const [resolution, setResolution] = useState<string | undefined>(undefined);
 
-  const setOriginalVideo = (url: string) => {
-    setOriginalVideoState(url);
-  };
-
-  const setEnhancedVideo = (url: string) => {
-    setEnhancedVideoState(url);
-  };
-
-  const setResolution = (res: string) => {
-    setResolutionState(res);
-  };
+  // Update the enhanced video URL when resolution changes
+  useEffect(() => {
+    if (originalVideoUrl && resolution) {
+      // Simulate enhanced video creation for the selected resolution
+      const newEnhancedVideoUrl = `${originalVideoUrl}#enhanced-${resolution}`;
+      setEnhancedVideoUrl(newEnhancedVideoUrl);
+    }
+  }, [originalVideoUrl, resolution]);
 
   return (
     <VideoContext.Provider
       value={{
-        originalVideo,
-        enhancedVideo,
+        originalVideoUrl,
+        setOriginalVideoUrl,
+        enhancedVideoUrl,
+        setEnhancedVideoUrl,
         resolution,
-        setOriginalVideo,
-        setEnhancedVideo,
         setResolution,
       }}
     >

@@ -1,54 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useVideoAssembler } from "../Hooks/useVideoAssembler";
+import React from "react";
+import "../Styles/DownloadButton.css";
 
-type Props = {
+interface DownloadButtonProps {
   frames: HTMLCanvasElement[];
   fps: number;
   filename: string;
   enhancedVideo: string | undefined;
-};
+}
 
-export const DownloadButton: React.FC<Props> = ({
+export const DownloadButton: React.FC<DownloadButtonProps> = ({
   frames,
   fps,
   filename,
   enhancedVideo,
 }) => {
-  const { isAssembling, assembleVideo, error } = useVideoAssembler();
-  const [videoURL, setVideoURL] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log("Enhanced video in DownloadButton:", enhancedVideo);
-  }, [enhancedVideo]);
-
-  const handleDownload = async () => {
-    try {
-      const videoBlob = await assembleVideo(frames, fps, filename);
-      if (videoBlob) {
-        setVideoURL(URL.createObjectURL(videoBlob));
-      }
-    } catch (err) {
-      console.error("Error during video assembly:", err);
+  const handleDownload = () => {
+    if (enhancedVideo) {
+      const link = document.createElement("a");
+      link.href = enhancedVideo;
+      link.download = filename;
+      link.click();
     }
   };
 
   return (
     <div className="download-container">
-      <button
-        onClick={handleDownload}
-        disabled={!enhancedVideo || isAssembling || frames.length === 0}
-      >
-        {isAssembling ? "Assembling Video..." : "Download Video"}
+      <button onClick={handleDownload} disabled={!enhancedVideo}>
+        Download Enhanced Video
       </button>
-      {videoURL && (
-        <a href={videoURL} download={filename}>
-          Download Enhanced Video
-        </a>
-      )}
-      {error && <p className="error-message">{error}</p>}
-      {!enhancedVideo && (
-        <p className="info-message">Enhance video to enable download.</p>
-      )}
+      {!enhancedVideo && <p>Enhance video to enable download.</p>}
     </div>
   );
 };

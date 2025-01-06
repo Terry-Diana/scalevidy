@@ -4,23 +4,27 @@ import { ResolutionPicker } from "./ResolutionPicker";
 import { Preview } from "./Preview";
 import { DownloadButton } from "./DownloadButton";
 import { useVideoContext } from "../Context/VideoContext";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export const AppContent: React.FC = () => {
   const { frames, fps, filename, enhancedVideoUrl } = useVideoContext();
 
-  console.log("Enhanced Video in AppContent:", enhancedVideoUrl);
-
   return (
     <div className="App">
-      <Upload />
-      <ResolutionPicker />
-      <Preview />
-      <DownloadButton
-        frames={frames}
-        fps={fps}
-        filename={filename}
-        enhancedVideo={enhancedVideoUrl}
-      />
+      <Header />
+      <main>
+        <Upload />
+        <ResolutionPicker />
+        <Preview />
+        <DownloadButton
+          frames={frames}
+          fps={fps}
+          filename={filename}
+          enhancedVideo={enhancedVideoUrl}
+        />
+      </main>
+      <Footer />
     </div>
   );
 };

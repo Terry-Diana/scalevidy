@@ -1,0 +1,29 @@
+/* App.css or Global CSS */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  color: #555;
+  padding: 10px 0;
+  font-size: 14px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ddd;
+}

@@ -1,0 +1,14 @@
+.header {
+  margin: 5px 0;
+  margin-bottom: 0;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #0056b3;
+}
+
+.header-logo {
+  margin: 0;
+  height: auto;
+  max-width: 100px;
+  transform: scale(3.5);
+}

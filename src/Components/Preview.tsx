@@ -8,6 +8,7 @@ export const Preview: React.FC = () => {
   const enhancedVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    console.log("Preview updated with enhanced video:", enhancedVideoUrl);
     if (enhancedVideoRef.current) {
       const video = enhancedVideoRef.current;
       video.currentTime = 0;
@@ -27,7 +28,6 @@ export const Preview: React.FC = () => {
     <div className="preview-container">
       <h2>Preview</h2>
       <div className="video-players">
-        {/* Original Video Section */}
         <div className="video-wrapper">
           <h3>Original Video</h3>
           {originalVideoUrl ? (
@@ -37,7 +37,6 @@ export const Preview: React.FC = () => {
           )}
         </div>
 
-        {/* Enhanced Video Section */}
         <div className="video-wrapper">
           <h3>Enhanced Video (15-Second Preview)</h3>
           {enhancedVideoUrl ? (

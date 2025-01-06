@@ -3,10 +3,12 @@ import { Upload } from "./Upload";
 import { ResolutionPicker } from "./ResolutionPicker";
 import { Preview } from "./Preview";
 import { DownloadButton } from "./DownloadButton";
-import { useVideoState } from "../Utils/VideoStateContext";
+import { useVideoContext } from "../Context/VideoContext";
 
 export const AppContent: React.FC = () => {
-  const { frames, fps, filename, enhancedVideo } = useVideoState();
+  const { frames, fps, filename, enhancedVideoUrl } = useVideoContext();
+
+  console.log("Enhanced Video in AppContent:", enhancedVideoUrl);
 
   return (
     <div className="App">
@@ -17,7 +19,7 @@ export const AppContent: React.FC = () => {
         frames={frames}
         fps={fps}
         filename={filename}
-        enhancedVideo={enhancedVideo}
+        enhancedVideo={enhancedVideoUrl}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useVideoAssembler } from "../Hooks/useVideoAssembler";
 
 type Props = {
@@ -8,9 +8,18 @@ type Props = {
   enhancedVideo: string | undefined;
 };
 
-export const DownloadButton: React.FC<Props> = ({ frames, fps, filename, enhancedVideo }) => {
+export const DownloadButton: React.FC<Props> = ({
+  frames,
+  fps,
+  filename,
+  enhancedVideo,
+}) => {
   const { isAssembling, assembleVideo, error } = useVideoAssembler();
   const [videoURL, setVideoURL] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log("Enhanced video in DownloadButton:", enhancedVideo);
+  }, [enhancedVideo]);
 
   const handleDownload = async () => {
     try {
@@ -37,7 +46,9 @@ export const DownloadButton: React.FC<Props> = ({ frames, fps, filename, enhance
         </a>
       )}
       {error && <p className="error-message">{error}</p>}
-      {!enhancedVideo && <p className="info-message">Enhance video to enable download.</p>}
+      {!enhancedVideo && (
+        <p className="info-message">Enhance video to enable download.</p>
+      )}
     </div>
   );
 };

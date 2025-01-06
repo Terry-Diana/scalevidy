@@ -7,7 +7,7 @@ export const enhanceVideo = async (
   try {
     const model = await tf.loadGraphModel("/path-to-model/model.json");
 
-    return "enhanced-video-url"; // Return the enhanced video file URL
+    return "enhanced-video-url";
   } catch (error) {
     console.error("Error enhancing video:", error);
     throw new Error("Failed to enhance the video.");

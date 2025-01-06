@@ -1,7 +1,9 @@
-import * as tf from '@tensorflow/tfjs';
-import { loadESPCNModel } from './espcnModel';
+import * as tf from "@tensorflow/tfjs";
+import { loadESPCNModel } from "./espcnModel";
 
-export const enhanceFrame = async (frame: HTMLImageElement): Promise<HTMLCanvasElement> => {
+export const enhanceFrame = async (
+  frame: HTMLImageElement
+): Promise<HTMLCanvasElement> => {
   const model = await loadESPCNModel();
 
   const inputTensor = tf.browser.fromPixels(frame).expandDims(0);
@@ -12,7 +14,7 @@ export const enhanceFrame = async (frame: HTMLImageElement): Promise<HTMLCanvasE
 
   const shape = squeezedTensor.shape;
 
-  let enhancedCanvas = document.createElement('canvas');
+  let enhancedCanvas = document.createElement("canvas");
   if (shape.length === 2) {
     await tf.browser.toPixels(squeezedTensor as tf.Tensor2D, enhancedCanvas);
   } else if (shape.length === 3) {

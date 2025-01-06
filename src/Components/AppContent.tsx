@@ -13,7 +13,12 @@ export const AppContent: React.FC = () => {
       <Upload />
       <ResolutionPicker />
       <Preview />
-      <DownloadButton frames={frames} fps={fps} filename={filename} enhancedVideo={enhancedVideo} />
+      <DownloadButton
+        frames={frames}
+        fps={fps}
+        filename={filename}
+        enhancedVideo={enhancedVideo}
+      />
     </div>
   );
 };

@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface VideoContextType {
   originalVideoUrl: string | undefined;
@@ -7,21 +13,35 @@ interface VideoContextType {
   setEnhancedVideoUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   resolution: string | undefined;
   setResolution: React.Dispatch<React.SetStateAction<string | undefined>>;
+  frames: HTMLCanvasElement[];
+  setFrames: React.Dispatch<React.SetStateAction<HTMLCanvasElement[]>>;
+  fps: number;
+  setFps: React.Dispatch<React.SetStateAction<number>>;
+  filename: string;
+  setFilename: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const VideoContext = createContext<VideoContextType | undefined>(undefined);
 
-export const VideoProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [originalVideoUrl, setOriginalVideoUrl] = useState<string | undefined>(undefined);
-  const [enhancedVideoUrl, setEnhancedVideoUrl] = useState<string | undefined>(undefined);
+export const VideoProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [originalVideoUrl, setOriginalVideoUrl] = useState<string | undefined>(
+    undefined
+  );
+  const [enhancedVideoUrl, setEnhancedVideoUrl] = useState<string | undefined>(
+    undefined
+  );
   const [resolution, setResolution] = useState<string | undefined>(undefined);
+  const [frames, setFrames] = useState<HTMLCanvasElement[]>([]);
+  const [fps, setFps] = useState<number>(30);
+  const [filename, setFilename] = useState<string>("enhanced-video.mp4");
 
-  // Update the enhanced video URL when resolution changes
   useEffect(() => {
     if (originalVideoUrl && resolution) {
-      // Simulate enhanced video creation for the selected resolution
       const newEnhancedVideoUrl = `${originalVideoUrl}#enhanced-${resolution}`;
       setEnhancedVideoUrl(newEnhancedVideoUrl);
+      console.log("Enhanced video URL updated:", newEnhancedVideoUrl);
     }
   }, [originalVideoUrl, resolution]);
 
@@ -34,6 +54,12 @@ export const VideoProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setEnhancedVideoUrl,
         resolution,
         setResolution,
+        frames,
+        setFrames,
+        fps,
+        setFps,
+        filename,
+        setFilename,
       }}
     >
       {children}

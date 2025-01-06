@@ -7,18 +7,21 @@ type VideoStateType = {
   setFps: React.Dispatch<React.SetStateAction<number>>;
   filename: string;
   setFilename: React.Dispatch<React.SetStateAction<string>>;
-  enhancedVideo: string | undefined; // Updated to string | undefined
-  setEnhancedVideo: React.Dispatch<React.SetStateAction<string | undefined>>; // Updated setter to match
+  enhancedVideo: string | undefined;
+  setEnhancedVideo: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const VideoStateContext = createContext<VideoStateType | undefined>(undefined);
 
-export const VideoStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const VideoStateProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [frames, setFrames] = useState<HTMLCanvasElement[]>([]);
   const [fps, setFps] = useState(30);
   const [filename, setFilename] = useState("enhanced-video.mp4");
-  const [enhancedVideo, setEnhancedVideo] = useState<string | undefined>(undefined); // Updated state to undefined
-
+  const [enhancedVideo, setEnhancedVideo] = useState<string | undefined>(
+    undefined
+  );
   return (
     <VideoStateContext.Provider
       value={{
@@ -29,7 +32,7 @@ export const VideoStateProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         filename,
         setFilename,
         enhancedVideo,
-        setEnhancedVideo, // Provide setter
+        setEnhancedVideo,
       }}
     >
       {children}

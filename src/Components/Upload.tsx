@@ -3,7 +3,8 @@ import { useVideoContext } from "../Context/VideoContext";
 import "../Styles/Upload.css";
 
 export const Upload: React.FC = () => {
-  const { setOriginalVideoUrl, setEnhancedVideoUrl, resolution } = useVideoContext();
+  const { setOriginalVideoUrl, setEnhancedVideoUrl, resolution } =
+    useVideoContext();
 
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -12,7 +13,6 @@ export const Upload: React.FC = () => {
       setOriginalVideoUrl(videoUrl);
 
       if (resolution) {
-        // Simulate enhanced video generation based on resolution
         setTimeout(() => {
           const enhancedVideoUrl = `${videoUrl}#enhanced-${resolution}`;
           setEnhancedVideoUrl(enhancedVideoUrl);

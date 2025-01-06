@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { assembleFrames } from '../Utils/videoAssembler';
+import { useState, useCallback } from "react";
+import { assembleFrames } from "../Utils/videoAssembler";
 
 export const useVideoAssembler = () => {
   const [isAssembling, setIsAssembling] = useState(false);
@@ -13,7 +13,7 @@ export const useVideoAssembler = () => {
         const videoBlob = await assembleFrames(frames, fps, filename);
         return videoBlob;
       } catch (err) {
-        setError('Failed to assemble video.');
+        setError("Failed to assemble video.");
         console.error(err);
         return null;
       } finally {
